@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar class = "general-toolbar">
+    <ion-title>Reçetelerim</ion-title>
+    <ion-buttons slot = "start" class="Boton">
+        <ion-menu-button *ngIf = "type == '1'"></ion-menu-button>
+        <ion-back-button *ngIf = "type == '2'"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="static-bg" fullscreen="true">
+  <ion-list *ngIf = "isLoading == false" style = "padding: 0px;">
+    <ion-item class = "pres-item">
+      <ion-label>Toplam {{prescriptions.length}} reçeteniz bulunmaktadır</ion-label>
+    </ion-item>
+    <ion-item *ngFor = "let prescription of prescriptions" lines = "full" button = "true" detail = "true"
+       [ngClass] = "{'assertive-item': prescription.dopingStatus == 1}" (click) = "openPrescriptionDetails(prescription.prescriptionNumber)">
+      <ion-icon *ngIf="prescription.dopingStatus == 1" class = "assertive-icon" name = "warning" slot = "start"></ion-icon>  
+      <ion-icon *ngIf="prescription.dopingStatus == -1"  class = "balanced-icon" name = "checkmark" slot = "start"></ion-icon>  
+      <ion-icon *ngIf="prescription.dopingStatus == 0" class = "balanced-icon" name = "help-circle" slot = "start"></ion-icon>  
+      <ion-label>{{prescription.date}} - {{prescription.hospital}} ({{prescription.doctor }})</ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

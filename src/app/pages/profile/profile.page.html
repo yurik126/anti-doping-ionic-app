@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-toolbar class = "static-toolbar">
+      <ion-title>Profilim</ion-title>
+      <ion-buttons slot = "start" class="Boton">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+<ion-content padding="true" class="static-bg" fullscreen="true">
+  <ion-content style="--background: transparent;">
+    <ion-card>
+        <ion-item>
+          <div style="display: flex; align-items: center; padding-top: 5px; padding-bottom: 5px;">
+            <img src="{{profilephoto}}" class="profile-img">
+            <div style = "margin-left: 20px;">
+              <h2>{{profilename}}</h2>
+              <p>{{profilesurname}}</p>
+            </div>
+          </div>
+        </ion-item>
+
+        <ion-item *ngIf = "gendername"> 
+          <ion-icon name = "female" slot = "start" *ngIf = "genderSelected==1"></ion-icon>
+          <ion-icon name = "male" slot = "start" *ngIf = "genderSelected==2"></ion-icon>
+          <ion-label>{{gendername}}</ion-label>
+          <ion-button fill = "clear" slot = "end" (click) = "editGender()">
+            <ion-icon name = "ios-create"  ></ion-icon>
+        </ion-button>
+        </ion-item>
+        <ion-item *ngIf = "educationname">
+          <ion-icon name = "school" slot = "start"></ion-icon>
+          <ion-label>{{educationname}}</ion-label>
+          <ion-button fill = "clear" slot = "end" (click) = "editEducation()">
+            <ion-icon name = "ios-create"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item *ngIf = "cityname">
+          <ion-icon name = "ios-globe" slot = "start"></ion-icon>
+          <ion-label>{{cityname}}</ion-label>
+          <ion-button fill = "clear" slot = "end" (click) = "editCity()">
+            <ion-icon name = "ios-create"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <ion-item *ngFor = "let usersport of usersports">
+            <ion-icon name = "ios-bicycle" slot = "start"></ion-icon>
+            <ion-label>
+              {{usersport.name}}
+              <p class="subtext-large">{{usersport.licensed == true ? "Lisanslı" : "Lisanssız"}}</p>
+            </ion-label>
+            <ion-button fill = "clear" slot = "end" (click) = "editSport(usersport.id, usersport.licensed)">
+              <ion-icon name = "ios-create"></ion-icon>
+            </ion-button>
+          </ion-item>
+      </ion-card>
+      <div style="display:flex; justify-content: center;">
+        <ion-item button = "true" lines = "none" class = "profile-button input-wrapper text-center" (click) = "addSport()">
+          <ion-label><strong>Spor dalı ekle</strong></ion-label>
+          <ion-icon name = "add" slot = "end"></ion-icon>
+        </ion-item>
+      </div>
+    </ion-content>
+</ion-content>

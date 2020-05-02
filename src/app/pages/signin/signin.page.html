@@ -1,0 +1,68 @@
+<!-- SIGN IN -->
+  <!-- http://www.gajotres.net/how-to-launch-external-application-with-ionic-framework/ -->
+  <ion-content padding="true" class="gradient-bg" fullscreen="true">
+    <ion-content class = "pattern-bg" padding="true">
+      <div class="row row-center">
+          <div class="col text-center">
+              <img src="assets/img/logo.png" class="signin-logo"/>
+          </div>
+
+      </div>
+      <div class="row row-center">
+          <div class="col">
+              <div class="text-center">
+                  <p class="light signin-pass-text">e-Nabız şifrenizi www.enabiz.gov.tr web sayfasını ziyaret ederek
+                      alabilirsiniz.</p>
+              </div>
+          </div>
+      </div>
+
+      <ion-item lines = "none" class="input-wrapper">
+        <ion-input type = "tel" placeholder="T.C. Kimlik Numaranızı Giriniz" [(ngModel)] = "user.tc"></ion-input>
+      </ion-item>
+      <ion-item lines = "none" class="input-wrapper">
+          <ion-input type = "password" placeholder="e-Nabız Şifrenizi Giriniz" [(ngModel)] = "user.password"></ion-input>
+      </ion-item>
+      <ion-item lines = "none" button = "true" class = "input-wrapper button-wrapper" (click) = "signIn(user)">
+        <ion-label><b>Giriş</b>
+        </ion-label>
+      </ion-item>
+
+      <div class="text-center" style="display: flex; align-items: center; padding: 15px 0px;">
+          <div class="col col-40 text-center text-right">
+              <a (click)="sifre()" class="light decoration-none">Şifremi unuttum</a>
+          </div>
+          <div class="col text-center col-20">
+              <ion-icon ios="ios-pulse" md="md-pulse" class="myicon-pulse signin-pulse"></ion-icon>
+          </div>
+          <div class="col col-40 text-left">
+              <span class="light decoration-none" (click)="enabizExternal()">enabiz.gov.tr</span>
+          </div>
+
+      </div>
+
+      <div class="row row-center">
+          <div class="col col-15"></div>
+          <div class="col col-80">
+              <div class="text-center">
+                  <a class="button button-small button-block button-positive signin-terms decoration-none" (click)="telif()">
+                      <strong>Kullanım Koşulları ve Telif Hakları</strong>
+                  </a>
+              </div>
+          </div>
+          <div class="col col-15"></div>
+      </div>
+    </ion-content>  
+  </ion-content>
+
+  <ion-footer class="bar-stable signin-footer">
+      <div class="row row-center" style="display: flex; align-items: center; padding: 10px 10px; color: #387ef5;">
+          <div class="col-15"></div>
+          <div class="col col-70 text-center signin-footer">
+              <span><img src="assets/img/sblogo.png" class="signin-footer-img"/></span>
+              <span class="assertive">&nbsp;Sporcu Sağlığı Bilgi Sistemi T.C. Sağlık Bakanlığı Projesidir.</span>
+          </div>
+          <div class="col-15 text-right">v.0.1.0</div>
+      </div>
+  </ion-footer>
+

@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar style="--background: transparent; --color: #ffffff">
+      <ion-title>İlaç Ekle</ion-title>
+      <ion-buttons slot = "end" class="Boton">
+        <ion-button (click) = "close()">
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding="true" class="gradient-bg" fullscreen="true">
+    <ion-content class = "pattern-bg" style="padding: 0px;">
+        <ion-item class="text-center light" lines = "none" style="--background: transparent; font-size: 14px;">
+          <ion-label>Besin etkileşimi kontrolü yapmak istediğiniz besini seçiniz</ion-label>
+        </ion-item>
+        <div *ngIf = "nutritions.length > 0">
+          <ion-item *ngFor = "let nutrition of nutritions" class = "margin-item general-text" button = "true" (click) = "addNutrition(nutrition)">
+            <ion-avatar style="padding-right: 10px;">
+              <ion-img src = "assets/img/hap.png"></ion-img>  
+            </ion-avatar>
+            <ion-label>{{nutrition.name}}</ion-label>
+            <ion-icon *ngIf = "nutrition.added == 1" name = "checkmark-circle-outline" slot = "end" class = "balance" style="font-size: 32px;"></ion-icon>
+            <ion-icon *ngIf = "nutrition.added != 1" name = "add" slot = "end" class = "positive" style="font-size: 32px;"></ion-icon>
+          </ion-item>
+        </div>
+    </ion-content>
+  </ion-content>
+  

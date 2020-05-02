@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar style="--background: transparent; --color: #ffffff">
+      <ion-title>İlaç Ekle</ion-title>
+      <ion-buttons slot = "end" class="Boton">
+          <ion-button (click) = "close()">
+              <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding="true" class="gradient-bg" fullscreen="true">
+    <div class = "pattern-bg" style="padding: 0px;">
+      <ion-item class="light text-center" style="--background: transparent;" lines = "none">
+        <ion-label style="white-space: normal;">
+            Besin etkileşimi kontrolü yapmak istediğiniz ilacı seçiniz
+        </ion-label>
+      </ion-item>
+  
+      <ion-item lines = "none" class="background-input-wrapper">
+        <ion-icon name = "search"></ion-icon>
+        <ion-input placeholder="İlaç ismi" [(ngModel)] = "search"  (ionChange) = "changeValue()"></ion-input>
+      </ion-item>
+      <div *ngIf = "products.length > 0">
+        <ion-item *ngFor = "let product of products" class="margin-item" button = "true" (click) = "addProduct(product)">
+          <ion-avatar style = "margin-right: 10px;">
+            <ion-img src = "assets/img/hap.png"></ion-img>  
+          </ion-avatar>
+          <ion-label>{{product.commercialname}}</ion-label>
+          <ion-icon *ngIf = "product.added == 1" name = "checkmark-circle-outline" slot = "end" class = "balance" style="font-size: 32px;"></ion-icon>
+          <ion-icon *ngIf = "product.added != 1" name = "add" slot = "end" class = "positive" style="font-size: 32px;"></ion-icon>
+        </ion-item>
+      </div>
+      
+        
+    </div>
+  </ion-content>

@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar style="--background: transparent; --color: #ffffff">
+    <ion-title>Etken Maddeye Göre Arama</ion-title>
+    <ion-buttons slot = "start" class="Boton">
+        <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+  
+  <ion-content padding="true" class="gradient-bg" fullscreen="true">
+    <div class = "pattern-bg" style="padding: 0px;">
+      <ion-item class="light text-center" style="--background: transparent;" lines = "none">
+        <ion-label style="white-space: normal;">
+            Aradığınız etken maddenin doping içeren etken madde
+                    içeren ilaç listesinde olup olmadığını kontrol etmek
+                    için 'Etken madde ismi' alanına etken madde adını girerek
+                    sorgulama yapabilirsiniz
+        </ion-label>
+      </ion-item>
+  
+      <ion-item lines = "none" class="background-input-wrapper">
+        <ion-icon name = "search"></ion-icon>
+        <ion-input placeholder="İlaç ismi" [(ngModel)] = "search" (ionChange) = "changeValue()"></ion-input>
+      </ion-item>
+      <div *ngIf = "substances.length > 0">
+        <ion-item *ngFor = "let substance of substances" button = "true" detail = "true" (click) = "goSubstenceDetails(substance.id ? substance.id : substance.substanceid)"
+        class="margin-item general-text" style = "--detail-icon-color: #387ef5; --detail-icon-opacity: 1; --detail-icon-font-size: 32px;">
+          <ion-avatar>
+            <ion-img src = "assets/img/hap.png"></ion-img>  
+          </ion-avatar>
+          <ion-label style="padding-left: 10px;">
+            {{substance.commercialname}}
+            <div *ngIf = "substance.alternativeNames">
+              <span *ngFor = "let alternativeName of substance.alternativeNames" style="font-size: smaller">
+                  {{alternativeName}}
+              </span>
+            </div>
+          </ion-label>
+        </ion-item>
+      </div>
+      
+        
+    </div>
+  </ion-content>

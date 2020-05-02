@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Spor Dalı</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-label>Lisanslı</ion-label>
+    <ion-toggle [(ngModel)]="selectedLicense"></ion-toggle>
+  </ion-item>
+    <ion-list *ngIf = "sports.length > 0">
+      <ion-radio-group (ionChange) = "change($event)">
+        <ion-list-header>
+            Spor seçiniz
+        </ion-list-header>
+        <ion-item *ngFor = "let sport of sports">
+          <ion-label>{{sport.name}}</ion-label>
+          <ion-radio value="{{sport.id}}" checked = "{{sport.id == sportid}}"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+</ion-content>
+<ion-footer>
+    <section>
+      <ion-button (click) ="cancel()" fill = "outline">İptal</ion-button>
+      <ion-button *ngIf = "type == 'edit'" (click) = "remove()">Sil</ion-button>
+      <ion-button (click) = "save()">Seç</ion-button>
+    </section>
+</ion-footer>

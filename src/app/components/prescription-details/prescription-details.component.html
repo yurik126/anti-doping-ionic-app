@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-toolbar class = "static-toolbar">
+    </ion-toolbar>
+  </ion-header>
+<ion-content padding="true" [ngClass]="{'alert-gradient-bg':prescription.dopingStatus == true, 'success-gradient-bg': prescription.dopingStatus == false}" fullscreen="true">
+  <ion-button fill = "clear" expand = "full" size = "large">
+      <ion-icon *ngIf="prescription.dopingStatus == true" name = "warning" class="logo-icon" ></ion-icon>  
+      <ion-icon *ngIf="prescription.dopingStatus == false" name = "checkmark-circle" class="logo-icon"></ion-icon>  
+  </ion-button>
+  <ion-item style="--background: transparent; text-align: center; --color: #ffffff; font-size: 24px; font-weight: 500; padding: 5px;" lines = "none">
+    <ion-label>{{message}}</ion-label>
+  </ion-item>
+
+  <div *ngFor = "let product of prescription.products">
+  <ion-item button = "true"  *ngIf="product.dopingStatus == 1"
+    class = "product-item text-center" detail = "true" lines = "none" (click) = "productDetails(product.id)">
+    <ion-label class="assertive">{{product.name}}</ion-label>
+  </ion-item>
+</div>
+
+  <ion-item style="--background: transparent; --color: #ffffff; text-align: center; font-size: 12px;" lines = "none">
+    <ion-label class = "light text-center">Açıklamalar bilgilendirme amaçlıdır. Mutlaka doktorunuza danışınız.</ion-label>
+  </ion-item>
+  <div style="width: 100%; display: flex; justify-content: center; padding-top: 10px;">
+    <ion-item lines = "none" button = "true" class = "input-wrapper text-center" style="width: 67%; --border-color: #b2b2b2;" (click) = "prescriptionDetailsOK()">
+      <ion-label><strong class="light">Anladım</strong></ion-label>
+    </ion-item>
+  </div>
+</ion-content>
+

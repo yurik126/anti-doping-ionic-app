@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar style="--background: transparent; --color: #ffffff">
+    <ion-title>Etkileşim Sorgulama</ion-title>
+    <ion-buttons slot = "start" class="Boton">
+        <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding="true" class="gradient-bg" fullscreen="true">
+    <ion-content class = "pattern-bg" style="padding: 0px;">
+      <ion-item lines = "none" class = "text-center" style="--min-height: 0px; padding: 0px;">
+        <ion-label style="font-size: 10px;">Bu sayfada yasaklı madde içeren ilaçların besinlerle etkileşimleri
+            görüntülenmektedir.</ion-label>
+      </ion-item>
+      <ion-item class="text-center light" lines = "none" style="--background: transparent; font-size: 14px;">
+        <ion-label>Kontrolünü yapmak istediğiniz ilaç ve besinleri seçiniz</ion-label>
+      </ion-item>
+      <ion-item lines = "none" button = "true" style="padding-right: 16px;" class = "input-wrapper text-center" (click) = "product()">
+        <ion-label>İlaç Ekle</ion-label>
+        <ion-icon name = "add" style="color: #ffffff;" slot = "end"></ion-icon>
+      </ion-item>
+      <ion-item lines = "none" button = "true" style="padding-right: 16px;" class = "input-wrapper text-center" (click) = "viewNutritions()">
+        <ion-label>Besin Ekle</ion-label>
+        <ion-icon name = "add" style="color: #ffffff;" slot = "end"></ion-icon>
+      </ion-item>
+      <div style="height: 10px;"></div>
+      <ion-list style="background: transparent">
+        <div *ngIf = "interactionProducts && interactionProducts.length > 0">
+          <ion-item *ngFor = "let interactionProduct of interactionProducts" class = "margin-item general-text" button = "true" (click) = "removeProduct(interactionProduct)">
+            <ion-avatar>
+              <ion-img src = "assets/img/hap.png"></ion-img>  
+            </ion-avatar>
+            <ion-label>{{interactionProduct.commercialname}}</ion-label>
+            <ion-icon name = "close-circle-outline" slot = "end" class = "assertive" style="font-size: 32px;"></ion-icon>
+          </ion-item>
+        </div>
+
+        <div *ngIf = "interactionNutritions && interactionNutritions.length > 0">
+          <ion-item *ngFor = "let interactionNutrition of interactionNutritions" class = "margin-item general-text" button = "true" (click) = "removeNutrition(interactionNutrition)">
+            <ion-avatar>
+              <ion-img src = "assets/img/hap.png"></ion-img>  
+            </ion-avatar>
+            <ion-label>{{interactionNutrition.name}}</ion-label>
+            <ion-icon name = "close-circle-outline" slot = "end" class = "assertive" style="font-size: 32px;"></ion-icon>
+          </ion-item>
+        </div>
+        <ion-item *ngIf = "(interactionProducts && interactionProducts.length) > 0 || (interactionNutritions && interactionNutritions.length > 0)" lines = "none" button = "true" style="padding-right: 16px;" class = "input-wrapper text-center button-fancy" (click) = "interactionDetails()">
+          <ion-label>Etkileşim Sorgula</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+</ion-content>

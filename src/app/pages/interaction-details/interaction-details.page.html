@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar class = "general-toolbar">
+    <ion-title>Etkileşim Sorgulama</ion-title>
+    <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="static-bg" fullscreen="true">
+  <ion-list *ngFor = "let interactionData of interactions" style = "padding: 0px;">
+    <ion-item  class = "pres-item">
+      <ion-label>{{interactionData.product.name}}</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf = "interactionData.dopingInfo.prohibited == true" lines = "full" class = "pres-item assertive-item">
+      <ion-icon name = "hand" slot = "start" class = "detail-icon" style="color: #ffffff;"></ion-icon>
+      <ion-label>{{interactionData.dopingInfo.prohibitionCondition}}</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf = "interactionData.dopingInfo.prohibited == true && !interactionData.interaction && !interactionData.warning" 
+      lines = "full" class = "general-text">
+      <ion-label>Besin etkileşimi bulunamamıştır</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf = "interactionData.dopingInfo.prohibited != true" lines = "full" class = "pres-item balanced">
+      <ion-icon name = "thumbs-up" slot = "start" class = "detail-icon" style="color: #ffffff;"></ion-icon>
+      <ion-label>Yasaklı Değil</ion-label>
+    </ion-item>
+
+    <ion-item *ngIf = "interactionData.dopingInfo.prohibited != true" lines = "full" class = "pres-item  balanced">
+      <ion-label>Bu ilaç yasaklı değildir. Sadece yasaklı madde içeren ilaçların besinlerle etkileşimleri
+          verilmektedir</ion-label>
+    </ion-item>
+    <div *ngIf="interactionData.nutritionInteractions.length > 0">
+      <div *ngFor = "let data of interactionData.nutritionInteractions">
+        <ion-item lines = "full" class = "icon-item">
+          <ion-icon name = "time" class = "detail-icon" slot = "start"></ion-icon>
+          <ion-label><strong>{{data.substance.name}} <> {{data.affectingNutrition.name}}</strong></ion-label>
+        </ion-item>
+        <ion-item lines = "full" class = "general-text">
+          <ion-label>{{data.info}}</ion-label>
+        </ion-item> 
+      </div>
+    </div>
+
+    <ion-item *ngIf = "interactionData.nutritionInteractionWarnings.length > 0" lines = "full" class = "icon-item">
+      <ion-icon name = "warning" class = "detail-icon" slot = "start"></ion-icon>
+      <ion-label><strong>Uyarılar</strong></ion-label>
+    </ion-item>
+
+    <ion-item *ngFor = "let data of interactionData.nutritionInteractionWarnings" lines = "full" class = "general-text">
+      <ion-label>
+        <h2>{{data.substance.name}}</h2>
+        <hr/>
+        {{data.info}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer style="background-color: #ef473a; height: 44px; font-size: 14px; padding-left: 5px; padding-top: 7px;">
+  <span class="light">Yukarıda yer alan açıklamalar bilgilendirme amaçlıdır. Mutlaka doktorunuza danışınız.</span>
+</ion-footer>

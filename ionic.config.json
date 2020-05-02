@@ -1,0 +1,7 @@
+{
+  "name": "Antidoping",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

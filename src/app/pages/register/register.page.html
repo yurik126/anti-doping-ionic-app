@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar class = "static-toolbar">
+    <ion-title>Kayıt</ion-title>
+    <ion-buttons slot = "start" class="Boton">
+        <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding="true" class="static-bg" fullscreen="true">
+  <ion-card>
+      <ion-item button = "true">
+        <div style="display: flex; align-items: center; padding-top: 5px; padding-bottom: 5px;">
+          <ion-avatar>
+            <img src="{{profilephoto}}" class="profile-img">
+          </ion-avatar>
+          <div style = "margin-left: 20px;">
+            <h2>{{profilename}}</h2>
+            <p>{{profilesurname}}</p>
+          </div>
+        </div>
+      </ion-item>
+
+      <ion-item > 
+        <ion-label>Cinsiyet</ion-label>
+        <ion-select slot = "end" (ionChange) = "changeGender($event)">
+          <ion-select-option selected value="">Cinsiyet seçiniz</ion-select-option>
+          <ion-select-option value="1">Kadın</ion-select-option>  
+          <ion-select-option value="2">Erkek</ion-select-option>
+        </ion-select>
+
+      </ion-item>
+      <ion-item>
+        <ion-label>Eğitim</ion-label>
+        <ion-select slot = "end" [(ngModel)]="education" (ionChange) = "changeEducation($event)">
+          <ion-select-option selected value="">Eğitim seçiniz</ion-select-option>
+          <ion-select-option *ngFor = "let education of educations" value="{{education.id}}">
+            {{education.name}}
+          </ion-select-option>  
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Şehir</ion-label>
+        <ion-select slot = "end" [(ngModel)]="city" (ionChange) = "changeCity($event)">
+          <ion-select-option selected value="">Şehir seçiniz</ion-select-option>
+          <ion-select-option *ngFor = "let city of cities" value="{{city.id}}">
+            {{city.name}}
+          </ion-select-option>  
+        </ion-select>
+      </ion-item>
+      <ion-item *ngFor = "let usersport of usersports">
+        <ion-icon name = "ios-bicycle" slot = "start"></ion-icon>
+        <ion-label>
+          {{usersport.name}}
+          <p class="subtext-large">{{usersport.licensed == true ? "Lisanslı" : "Lisanssız"}}</p>
+        </ion-label>
+        <ion-button fill = "clear" slot = "end" (click) = "deleteSport(usersport.id)">
+          <ion-icon name = "ios-remove-circle" color = "primary"></ion-icon>
+        </ion-button>
+      </ion-item>
+  </ion-card>
+  <div style="display:flex; justify-content: center;">
+    <ion-item button = "true" lines = "none" class = "profile-button input-wrapper text-center" (click) = "showSports()">
+      <ion-label><strong>Spor dalı ekle</strong></ion-label>
+      <ion-icon name = "add" slot = "end"></ion-icon>
+    </ion-item>
+  </div>
+    <div style="display:flex; justify-content: center;">
+    <ion-item button = "true" lines = "none" class = "profile-button input-wrapper text-center" (click) = "showTermModal()">
+      <ion-label><strong>Kaydet</strong></ion-label>
+      <ion-icon name = "ios-arrow-forward" slot = "end"></ion-icon>
+    </ion-item>
+  </div>
+</ion-content>

@@ -1,0 +1,38 @@
+<!-- ABOUT -->
+<ion-header>
+    <ion-toolbar class = "static-toolbar">
+      <ion-title>About</ion-title>
+      <ion-buttons slot = "start" class="Boton">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content padding="true" class="static-bg" fullscreen="true">
+    <ion-content style="--padding-top: 0px; --background: transparent;">
+        <div class="content-padding">
+        <p>
+            Sporcu Sağlığı Bilgi Sistemi, sporcuların, ilaçların etken maddelerinin Dünya Anti-Doping Ajansı (WADA)
+            yayınlarına göre doping etkisine sahip olup olmadığı içerik bilgisini sorgulayabilecekleri,
+            bilgilendirme amaçlı mobil bir uygulamadır. Sporcuların daha bilinçli ilaç kullanımını teşvik etmek ve
+            onlara bu konuda gerekli bilgileri tedarik etmek amacıyla geliştirilmiştir. Verilen bilgiler ve
+            uyarılarla, akılcı ve güvenli ilaç kullanımı ve ilaç kullanımında sporcuların doping etkisi yaratacak
+            ilaçlardan uzak durmasının sağlanması amaçlanmaktadır.
+        </p>
+        <p>
+            Sporcu Sağlığı Bilgi Sisteminde, e-Nabız sisteminden alınan sporcuya ait sağlık verileri ve ilaç bilgi
+            sisteminden alınan ilaç bilgileri yer almaktadır.
+        </p>
+        <p>
+            Bu veri tabanı; homeopatik ürünler, geleneksel ilaçlar, bitkiler ve probiyotikler de dâhil olmak üzere
+            hiçbir besin takviyesi hakkında bilgi içermez.
+        </p>
+        </div>
+
+        <ion-item lines = "none" (click) = "gotoTerms()" button = "true"  detail = "true" class = "button-about1 input-wrapper button-wrapper text-center">
+            <ion-label>Kullanım Koşulları</ion-label>
+        </ion-item>
+        <ion-item lines = "none" (click) = "gotoPrivacy()" button = "true" detail = "true" class = "button-about2 input-wrapper button-wrapper text-center">
+            <ion-label>Telif Hakları</ion-label>
+        </ion-item>  
+    </ion-content>
+</ion-content>

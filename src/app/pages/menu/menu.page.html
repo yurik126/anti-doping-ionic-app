@@ -1,0 +1,63 @@
+<ion-menu contentId="content">
+     
+    <ion-content fullscreen="true" class = "menu-wrapper">
+      <ion-menu-toggle>
+        <ion-item lines = "none" class="profile item-dark item item-complex menu-profile-bg">
+          <div style="display: flex; align-items: center; padding-top: 45px; padding-bottom: 35px;">
+            <ion-avatar routerLink = "/menu/profile" routerDirection="root" routerLinkActive="active">
+              <img src="{{profilephoto}}" class="profile-img">
+            </ion-avatar>
+          <div style = "margin-left: 20px; color: #ffffff;">
+            <h2>{{profilename}}</h2>
+            <p>{{profilesurname}}</p>
+          </div>
+        </div>
+      </ion-item>
+      </ion-menu-toggle>
+      <div *ngFor="let p of pages">
+        <!-- Standard Menu Item -->
+        <ion-menu-toggle *ngIf="p.url">
+          <ion-item lines = "none" [routerLink]="p.url" routerDirection="root" class="menu-item" routerLinkActive="active">
+            <ion-icon [name]="p.icon" slot="start"></ion-icon>
+            <ion-label>
+              {{ p.title }}
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        
+        <!-- Item with Children -->
+   
+        <ion-item lines = "none" *ngIf="p.children?.length > 0" class="menu-item" (click)="p.open = !p.open" [class.parent-active]="p.open" detail="false">
+          <ion-icon  slot="start" name="arrow-forward" *ngIf="!p.open"></ion-icon>
+          <ion-icon slot="start" name="arrow-down" *ngIf="p.open"></ion-icon>
+          <ion-label>{{ p.title }}</ion-label>
+        </ion-item>
+   
+        <!-- Children List for clicked Item -->
+        <ion-list *ngIf="p.open">
+          <ion-menu-toggle>
+            <ion-item lines = "none" *ngFor="let sub of p.children" class="sub-item menu-item" [routerLink]="sub.url" routerDirection="root"
+              routerLinkActive="active">
+              <ion-icon [name]="sub.icon" slot="start"></ion-icon>
+              <ion-label>
+                {{ sub.title }}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </div>
+    </ion-content>
+    <ion-footer class="bar-dark footer">
+        <ion-item lines = "none" class="menu-item item-icon-left logout" (click)="signout()">
+            <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+            <ion-label>
+                Çıkış
+            </ion-label>
+        </ion-item>
+  
+    </ion-footer>
+   
+  </ion-menu>
+  
+   
+  <ion-router-outlet id="content" main></ion-router-outlet>

@@ -1,0 +1,109 @@
+<ion-header>
+    <ion-toolbar class = "general-toolbar">
+      <ion-title>Etken Maddeye Göre Ara</ion-title>
+      <ion-buttons slot = "start" class="Boton">
+          <ion-back-button></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="static-bg" fullscreen="true">
+    <ion-list style = "padding: 0px;">
+      <ion-item *ngIf = "substanceName" class = "pres-item">
+          <ion-label>{{substanceName}}</ion-label>
+      </ion-item>
+      <ion-item *ngIf = "dopingStatus == true || dopingStatus == false" class = "pres-item" lines = "full"
+        [ngClass] = "{'assertive-item':dopingStatus == true, 'balanced':dopingStatus == false}">
+          <ion-icon *ngIf = "dopingStatus == true" name = "hand" slot = "start" class = "detail-icon" style="color: #ffffff;"></ion-icon>
+          <ion-icon *ngIf = "dopingStatus == false" name = "thumbs-up" slot = "start" class = "detail-icon" style="color: #ffffff;"></ion-icon>
+          <ion-label>{{prohibitionCondition}}</ion-label>
+      </ion-item>
+      <ion-item *ngIf = "prohibitionConditionDescription" lines = "full"
+        [ngClass] = "{'assertive':dopingStatus == true, 'general-text':dopingStatus == false}">
+          <ion-label>{{prohibitionConditionDescription}}</ion-label>
+      </ion-item>
+
+      <ion-item *ngIf = "wadaCode" lines = "full" class = "icon-item">
+        <ion-icon name = "information-circle" class = "detail-icon" slot = "start"></ion-icon>
+        <ion-label><strong>WADA Kodu</strong></ion-label>
+      </ion-item>
+      <ion-item *ngIf = "wadaCode" lines = "full" class = "general-text">
+        <ion-label>{{wadaCode}}</ion-label>
+      </ion-item>
+
+      <ion-item *ngIf = "prohibitionTime" lines = "full" class = "icon-item">
+        <ion-icon name = "time" class = "detail-icon" slot = "start"></ion-icon>
+        <ion-label><strong>Yasaklılık Süresi</strong></ion-label>
+      </ion-item>
+      <ion-item *ngIf = "prohibitionTime" lines = "full" class = "general-text">
+        <ion-label>{{prohibitionTime}}</ion-label>
+      </ion-item>
+  
+      <ion-item *ngIf = "prohibitedGender" lines = "full" class = "icon-item">
+        <ion-icon name = "ios-person" class = "detail-icon" slot = "start"></ion-icon>
+        <ion-label><strong>Yasaklı olduğu cinsiyet</strong></ion-label>
+      </ion-item>
+      <ion-item *ngIf = "prohibitedGender" lines = "full" class = "general-text">
+        <ion-label>{{prohibitedGender}} için yasaklı</ion-label>
+      </ion-item>
+  
+      <ion-item *ngIf = "specialCases" lines = "full" class = "icon-item">
+          <ion-icon name = "information-circle" class = "detail-icon" slot = "start"></ion-icon>
+          <ion-label><strong>Özel Durumlar</strong></ion-label>
+        </ion-item>
+        <ion-item *ngIf = "specialCases" lines = "full" class = "general-text">
+          <ion-label>{{specialCases}}</ion-label>
+        </ion-item>
+  
+      <ion-item *ngIf = "alternativeNames" lines = "full" class = "icon-item">
+        <ion-icon name = "radio-button-on" class = "detail-icon" slot = "start"></ion-icon>
+        <ion-label><strong>Alternatif İsimler</strong></ion-label>
+      </ion-item>
+      <div *ngIf = "alternativeNames">
+        <ion-item *ngFor = "let alternativeName of alternativeNames"  lines = "full" class = "general-text">
+          <ion-label>{{alternativeName.name}}</ion-label>
+        </ion-item>
+      </div>
+  
+      <ion-item *ngIf = "includedProducts" lines = "full" class = "icon-item">
+        <ion-icon name = "flask" class = "detail-icon" slot = "start"></ion-icon>
+        <ion-label><strong>İçeren ilaçlar</strong></ion-label>
+      </ion-item>
+      <div *ngIf = "includedProducts">
+        <ion-item *ngFor = "let product of includedProducts" button = "true" lines = "full" 
+          class = "general-text" detail = "true" (click) = "goProductDetails(product.id)" style="--detail-icon-opacity: 0.8;">
+          <ion-label>{{product.name}}</ion-label>
+        </ion-item>
+      </div>
+  
+      <ion-item *ngIf = "nutritionInteractionWarnings.length > 0" lines = "full" class = "icon-item">
+        <ion-icon name = "shuffle" class = "detail-icon" slot = "start"></ion-icon>
+        <ion-label><strong>Besin Uyarları</strong></ion-label>
+      </ion-item>
+      <div *ngIf = "nutritionInteractionWarnings.length > 0">
+        <ion-item *ngFor = "let nutritionInteractionWarning of nutritionInteractionWarnings" lines = "full" class = "general-text">
+          <div>
+            <ion-label><strong>{{nutritionInteractionWarning.substance.name}}</strong></ion-label>
+            <ion-label>{{nutritionInteractionWarning.info}}</ion-label>
+          </div>
+        </ion-item>
+      </div>
+  
+      <ion-item *ngIf = "nutritionInteractions.length > 0" lines = "full" class = "icon-item">
+        <ion-icon name = "shuffle" class = "detail-icon" slot = "start"></ion-icon>
+        <ion-label><strong>Besin Etkileşimleri</strong></ion-label>
+      </ion-item>
+      <div *ngIf = "nutritionInteractions.length > 0">
+        <ion-item *ngFor = "let nutritionInteraction of nutritionInteractions" lines = "full" class = "general-text">
+          <div>
+            <ion-label><strong>{{nutritionInteraction.substance.name}} <=> {{nutritionInteraction.affectingNutrition.name}}</strong></ion-label>
+            <ion-label>{{nutritionInteraction.info}}</ion-label>
+          </div>
+        </ion-item>
+      </div>
+    </ion-list>
+  </ion-content>
+  <ion-footer style="background-color: #ef473a; height: 44px; font-size: 14px; padding-left: 5px; padding-top: 7px;">
+    <span class="light">Yukarıda yer alan açıklamalar bilgilendirme amaçlıdır. Mutlaka doktorunuza danışınız.</span>
+  </ion-footer>
+  

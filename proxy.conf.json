@@ -1,0 +1,8 @@
+{
+    "/api": {
+       "target": "https://test-doping-api.vademecumonline.com.tr",
+       "changeOrigin": true,
+       "secure": false,
+       "logLevel": "debug"
+     }
+   }
